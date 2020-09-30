@@ -24,26 +24,30 @@ public class ListViewActivity extends AppCompatActivity {
     private static final String KEY_COUNT = "key_count";
     private SharedPreferences savedText;
     private static String NOTE_TEXT = "saved_text";
+    // Список с мапами, изначально пустая
     private static List<Map<String, String>> simpleAdapterContent = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // всегда следующие 2 строчки такие, только основной Активити меняется
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
+        // добавляем тулбар 2 строчки
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        // находим наш основной лист
         ListView list = findViewById(R.id.list);
         final SwipeRefreshLayout swipeRefresh = findViewById(R.id.swipe_refresh);
         final BaseAdapter listContentAdapter = createAdapter(simpleAdapterContent);
 
         String str = getString(R.string.large_text);
+
         savedText = getSharedPreferences("SavedText", MODE_PRIVATE);
         SharedPreferences.Editor editor = savedText.edit();
         savedText.edit()
                 .putString(NOTE_TEXT, str)
                 .apply();
-
+        // Обращаемся к подготовке контента, но он ничего не возвращает, работает напрямую с адаптером
         prepareContent();
 
         list.setAdapter(listContentAdapter);
@@ -70,7 +74,14 @@ public class ListViewActivity extends AppCompatActivity {
 
     @NonNull
     private BaseAdapter createAdapter(List<Map<String, String>> values) {
-        return new SimpleAdapter(this, values, R.layout.item, new String[]{KEY_TITLE, KEY_COUNT}, new int[]{R.id.text_Tv, R.id.symbol_cnt_Tv});
+        // создаем массив со значениями ключ карта. Откуда берем значения
+        String[] from = {KEY_TITLE, KEY_COUNT};
+        // куда эти значения будут вставляться ЧИСЛО!
+        int[] to = {R.id.text_Tv, R.id.symbol_cnt_Tv};
+        // Сам Адаптер
+        return new SimpleAdapter(this, values, R.layout.item, from, to);
+        // или Вместо фром и То вставлять новые данные сразу в симпл Адаптер)
+        // return new SimpleAdapter(this, values, R.layout.item, new String[]{KEY_TITLE, KEY_COUNT}, new int[]{R.id.text_Tv, R.id.symbol_cnt_Tv});
     }
 
     @NonNull
