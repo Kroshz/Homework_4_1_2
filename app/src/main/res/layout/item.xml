@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/text_Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#6C00BCD4"
+        app:layout_constraintBottom_toBottomOf="@id/symbol_cnt_Tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="text" />
+
+    <TextView
+        android:id="@+id/symbol_cnt_Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="count"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_Tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
